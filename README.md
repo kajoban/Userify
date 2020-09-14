@@ -34,7 +34,7 @@ password | no
 
 ### CREATE new user 
 note: email and password required<br/>
-`curl -d "name=kajoban&email=kajoban@kajoban.ca&password=1234" -X POST http://localhost:8000/api/users/`
+`curl -d "name=___&email=___&password=___" -X POST http://localhost:8000/api/users/`
 
 ### UPDATE single user via id 
 note: all fields optional<br/>
