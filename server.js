@@ -59,8 +59,8 @@ app.get("/api/users/:id", (req, res, next) => {
 
 //CREATE new user
 //can use curL to hit:
-//curl -d "name=x&email=y&password=z" -X POST http://localhost:8000/api/user/
-app.post("/api/user/", (req, res, next) => {
+//curl -d "name=x&email=y&password=z" -X POST http://localhost:8000/api/users/
+app.post("/api/users/", (req, res, next) => {
   //req.body will be converted from string -> js object via body parser
   //check mandatory fields
   var errors = [];
@@ -85,13 +85,45 @@ app.post("/api/user/", (req, res, next) => {
   //use classic function notation so we can gett this.lastID
   db.run(sql, params, function (err, result) {
     if (err) {
-      res.status(400).json({ error: "error.message" });
+      res.status(400).json({ error: error.message });
       return;
     } else {
       res.json({
         message: "success",
         data: data,
         id: this.lastID,
+      });
+    }
+  });
+});
+
+//UPDATE a user via id
+app.patch("/api/users/:id", (req, res, next) => {
+  var data = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password ? md5(req.body.password) : null,
+  };
+  console.log(data);
+  //COALESCE takes first non-null value
+  //only updates field if need be
+  var sql = `UPDATE user 
+        SET
+        name = COALESCE(?, name),
+        email = COALESCE(?, email),
+        password = COALESCE(?, password)
+        WHERE id = ?`;
+  var params = [data.name, data.email, data.password, req.params.id];
+  db.run(sql, params, function (err, result) {
+    console.log("running sql");
+    if (err) {
+      res.status(400).json({ error: res.message });
+      return;
+    } else {
+      res.json({
+        message: "success",
+        data: data,
+        changes: this.changes,
       });
     }
   });
