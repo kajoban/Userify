@@ -33,11 +33,11 @@ password | no
 `curl -X GET http://localhost:8000/api/users/:id`
 
 ### CREATE new user 
-note: email and password required 
+note: email and password required<br/>
 `curl -d "name=kajoban&email=kajoban@kajoban.ca&password=1234" -X POST http://localhost:8000/api/users/`
 
 ### UPDATE single user via id 
-note: all fields optional
+note: all fields optional<br/>
 `curl -d "name=___&email=___&password=___" -X PATCH http://localhost:8000/api/users/:id`
 
 ### DELETE single user via id 
