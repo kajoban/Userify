@@ -1,0 +1,26 @@
+{
+  "name": "userify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kajoban/Userify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kajoban/Userify/issues"
+  },
+  "homepage": "https://github.com/kajoban/Userify#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "md5": "^2.3.0",
+    "nodemon": "^2.0.4",
+    "sqlite3": "^5.0.0"
+  }
+}
